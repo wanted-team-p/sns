@@ -1,6 +1,7 @@
 package com.wanted.sns.domain;
 
 import jakarta.persistence.*;
+import java.util.*;
 import java.util.regex.*;
 import lombok.*;
 
@@ -16,14 +17,22 @@ public class Email {
     private String value;
 
     public Email(final String value) {
-        validateFormatPattern(value);
+        validate(value);
         this.value = value;
     }
 
-    private void validateFormatPattern(final String value) {
-        final Matcher matcher = EMAIL_FORMAT_PATTERN.matcher(value);
-        if (!matcher.matches()) {
+    private void validate(final String value) {
+        if (Objects.isNull(value)) {
+            throw new NullPointerException("이메일은 null일 수 없습니다.");
+        }
+
+        if (!isMatch(value)) {
             throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
         }
+    }
+
+    private static boolean isMatch(final String value) {
+        final Matcher matcher = EMAIL_FORMAT_PATTERN.matcher(value);
+        return matcher.matches();
     }
 }
