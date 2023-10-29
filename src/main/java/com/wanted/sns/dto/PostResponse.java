@@ -36,7 +36,7 @@ public class PostResponse {
     id = post.getSeq();
     title = post.getTitle();
     type = post.getType().getValue();
-    content = post.getContent();
+    content = post.getContent().substring(0,20);
     viewCount = post.getViewCount();
     likeCount = post.getLikeCount();
     shareCount = post.getShareCount();
