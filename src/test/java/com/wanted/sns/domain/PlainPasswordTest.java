@@ -2,6 +2,7 @@ package com.wanted.sns.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.wanted.sns.exception.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
@@ -14,7 +15,7 @@ class PlainPasswordTest {
         final String nullValue = null;
 
         assertThatThrownBy(() -> new PlainPassword(nullValue))
-                .isInstanceOf(NullPointerException.class)
+                .isInstanceOf(BusinessException.class)
                 .hasMessage("패스워드는 null일 수 없습니다.");
     }
 
@@ -25,7 +26,7 @@ class PlainPasswordTest {
         final int minimumLength = 10;
 
         assertThatThrownBy(() -> new PlainPassword(value))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(BusinessException.class)
                 .hasMessage(String.format("패스워드 길이는 %d자 이상으로 입력해주세요.", minimumLength));
     }
 
@@ -34,7 +35,7 @@ class PlainPasswordTest {
     @ParameterizedTest
     void invalidFormat(String value) {
         assertThatThrownBy(() -> new PlainPassword(value))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(BusinessException.class)
                 .hasMessage("패스워드 형식이 올바르지 않습니다.");
     }
 
@@ -45,7 +46,7 @@ class PlainPasswordTest {
         final int maxSameContinuousLength = 2;
 
         assertThatThrownBy(() -> new PlainPassword(value))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(BusinessException.class)
                 .hasMessage(String.format("같은 문자는 연속적으로 %d회 이상 사용할 수 없습니다.", maxSameContinuousLength + 1));
     }
 

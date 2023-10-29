@@ -1,5 +1,6 @@
 package com.wanted.sns.domain;
 
+import com.wanted.sns.exception.*;
 import jakarta.persistence.*;
 import java.util.*;
 import java.util.regex.*;
@@ -23,11 +24,11 @@ public class Email {
 
     private void validate(final String value) {
         if (Objects.isNull(value)) {
-            throw new NullPointerException("이메일은 null일 수 없습니다.");
+            throw new BusinessException("이메일은 null일 수 없습니다.");
         }
 
         if (!isMatch(value)) {
-            throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
+            throw new BusinessException("이메일 형식이 올바르지 않습니다.");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.wanted.sns.domain;
 
+import com.wanted.sns.exception.*;
 import jakarta.persistence.*;
 import java.util.*;
 import java.util.regex.*;
@@ -27,23 +28,23 @@ public class PlainPassword {
 
     private void validateNull(final String value) {
         if (Objects.isNull(value)) {
-            throw new NullPointerException("패스워드는 null일 수 없습니다.");
+            throw new BusinessException("패스워드는 null일 수 없습니다.");
         }
     }
 
     private void validateLength(final int length) {
         if (length < PASSWORD_MINIMUM_LENGTH) {
-            throw new IllegalArgumentException(String.format("패스워드 길이는 %d자 이상으로 입력해주세요.", PASSWORD_MINIMUM_LENGTH));
+            throw new BusinessException(String.format("패스워드 길이는 %d자 이상으로 입력해주세요.", PASSWORD_MINIMUM_LENGTH));
         }
     }
 
     private void validateFormat(final String value) {
         if (!isMatch(value)) {
-            throw new IllegalArgumentException("패스워드 형식이 올바르지 않습니다.");
+            throw new BusinessException("패스워드 형식이 올바르지 않습니다.");
         }
 
         if (isContinuousSameCharacter(value)) {
-            throw new IllegalArgumentException(
+            throw new BusinessException(
                     String.format("같은 문자는 연속적으로 %d회 이상 사용할 수 없습니다.", MAX_SAME_CONTINUOUS_CHARACTER_LENGTH + 1));
         }
     }

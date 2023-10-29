@@ -2,6 +2,7 @@ package com.wanted.sns.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.wanted.sns.exception.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
@@ -14,7 +15,7 @@ class EmailTest {
         final String value = null;
 
         assertThatThrownBy(() -> new Email(value))
-                .isInstanceOf(NullPointerException.class)
+                .isInstanceOf(BusinessException.class)
                 .hasMessage("이메일은 null일 수 없습니다.");
     }
 
@@ -23,7 +24,7 @@ class EmailTest {
     @ParameterizedTest
     void invalidEmailFormat(String value) {
         assertThatThrownBy(() -> new Email(value))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(BusinessException.class)
                 .hasMessage("이메일 형식이 올바르지 않습니다.");
     }
 
