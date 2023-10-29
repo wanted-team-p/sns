@@ -26,7 +26,7 @@ public class MemberAcceptanceTest {
     @DisplayName("회원가입에 성공하면, 상태코드 201을 반환한다.")
     @Test
     void signUp() {
-        final SignUpRequest request = new SignUpRequest("memberId", "abcd3@naver.com", "abcABC1234!",
+        final SignUpRequest request = new SignUpRequest("accountName", "abcd3@naver.com", "abcABC1234!",
                 LocalDate.of(2000, 1, 1), "hanul", "01012545678");
 
         final Response response = RestAssured.given().log().all()
@@ -42,7 +42,7 @@ public class MemberAcceptanceTest {
     @Test
     void signUpWithIncorrectInformation() {
         final String invalidPassword = "abc";
-        final SignUpRequest request = new SignUpRequest("memberId", "abcd3@naver.com", invalidPassword,
+        final SignUpRequest request = new SignUpRequest("accountName", "abcd3@naver.com", invalidPassword,
                 LocalDate.of(2000, 1, 1), "hanul", "01012545678");
 
         final Response response = RestAssured.given().log().all()

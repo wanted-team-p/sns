@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.jpa.domain.support.*;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -17,7 +18,7 @@ public class Member {
     private Long id;
 
     @Column(nullable = false)
-    private String memberId;
+    private String accountName;
 
     @Embedded
     private Email email;
@@ -42,10 +43,10 @@ public class Member {
     private LocalDateTime createdAt;
 
     @Builder
-    public Member(final String memberId, final Email email, final String password, final LocalDate dateOfBirth,
+    public Member(final String accountName, final Email email, final String password, final LocalDate dateOfBirth,
                   final String name, final String phoneNumber,
                   final MemberRole role) {
-        this.memberId = memberId;
+        this.accountName = accountName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
