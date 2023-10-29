@@ -2,6 +2,7 @@ package com.wanted.sns.support;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.wanted.sns.domain.*;
 import org.junit.jupiter.api.*;
 
 class EncryptorTest {
@@ -11,9 +12,9 @@ class EncryptorTest {
     void encrypt() {
         final Encryptor encryptor = new SHA256Encryptor();
         final String password = "abcABC1234!";
-        final String expected = encryptor.encrypt(password);
+        final String expected = encryptor.encrypt(new PlainPassword(password));
 
-        final String actual = encryptor.encrypt(password);
+        final String actual = encryptor.encrypt(new PlainPassword(password));
 
         assertThat(actual).isEqualTo(expected);
     }

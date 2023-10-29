@@ -1,5 +1,6 @@
 package com.wanted.sns.support;
 
+import com.wanted.sns.domain.*;
 import java.security.*;
 import org.springframework.stereotype.*;
 
@@ -7,10 +8,10 @@ import org.springframework.stereotype.*;
 public class SHA256Encryptor implements Encryptor {
 
     @Override
-    public String encrypt(final String password) {
+    public String encrypt(final PlainPassword password) {
         try {
             final MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(password.getBytes());
+            messageDigest.update(password.getValue().getBytes());
             return bytesToHex(messageDigest.digest());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
