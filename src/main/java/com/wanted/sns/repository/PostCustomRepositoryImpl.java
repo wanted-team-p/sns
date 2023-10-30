@@ -89,11 +89,11 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
 
         query.where(builder.and(searchCriteria.toArray(new Predicate[0])));
 
-        if (postRequest.order().equals(Order.ASC.name())) {
+        if (postRequest.order().equals(Order.ASC.getValue())) {
             query.orderBy(builder.asc(post.get(postRequest.orderBy())));
         }
 
-        if (postRequest.order().equals(Order.DESC.name())) {
+        if (postRequest.order().equals(Order.DESC.getValue())) {
             query.orderBy(builder.desc(post.get(postRequest.orderBy())));
         }
 
