@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostService {
 
-  private final PostRepository postRepository;
+    private final PostRepository postRepository;
 
-  public List<PostResponse> getPostList(PostRequest postRequest){
-    return postRepository.findAllPostBy(postRequest);
-  }
+    public List<PostResponse> getPostList(PostRequest postRequest) {
+        return postRepository.findAllPostBy(postRequest);
+    }
 
 }

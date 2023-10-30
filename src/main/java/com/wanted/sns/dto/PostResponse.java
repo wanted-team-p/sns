@@ -12,39 +12,39 @@ import lombok.Getter;
 @Getter
 public class PostResponse {
 
-  long id;
+    long id;
 
-  String title;
+    String title;
 
-  String type;
+    String type;
 
-  String content;
+    String content;
 
-  int viewCount;
+    int viewCount;
 
-  int likeCount;
+    int likeCount;
 
-  int shareCount;
+    int shareCount;
 
-  List<String> hashtagList = new ArrayList<>();
+    List<String> hashtagList = new ArrayList<>();
 
-  LocalDateTime updatedAt;
+    LocalDateTime updatedAt;
 
-  LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
-  public PostResponse(Post post){
-    id = post.getSeq();
-    title = post.getTitle();
-    type = post.getType().getValue();
-    content = post.getContent().substring(0,20);
-    viewCount = post.getViewCount();
-    likeCount = post.getLikeCount();
-    shareCount = post.getShareCount();
-    updatedAt = post.getUpdatedAt();
-    createdAt = post.getCreatedAt();
-    for(HashtagMapping hashtagMapping : post.getHashtagMappingList()){
-      hashtagList.add(hashtagMapping.getHashtag().getName());
+    public PostResponse(Post post) {
+        id = post.getSeq();
+        title = post.getTitle();
+        type = post.getType().getValue();
+        content = post.getContent().substring(0, 20);
+        viewCount = post.getViewCount();
+        likeCount = post.getLikeCount();
+        shareCount = post.getShareCount();
+        updatedAt = post.getUpdatedAt();
+        createdAt = post.getCreatedAt();
+        for (HashtagMapping hashtagMapping : post.getHashtagMappingList()) {
+            hashtagList.add(hashtagMapping.getHashtag().getName());
+        }
     }
-  }
 
 }

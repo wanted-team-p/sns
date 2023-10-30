@@ -1,5 +1,6 @@
 package com.wanted.sns.domain;
 
+import com.wanted.sns.dto.PostResponse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,28 +16,28 @@ import lombok.Getter;
 @Entity
 public class Post {
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
-  private long seq;
+    @OneToMany(mappedBy = "post")
+    List<HashtagMapping> hashtagMappingList;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private long seq;
+    @Enumerated(EnumType.STRING)
+    private SnsType type;
+    private String title;
+    private String content;
+    private int viewCount;
+    private int likeCount;
+    private int shareCount;
+    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
 
-  @Enumerated(EnumType.STRING)
-  private SnsType type;
+    public PostResponse toDTO() {
+        increaseViewCount();
+        return new PostResponse(this);
+    }
 
-  private String title;
-
-  private String content;
-
-  private int viewCount;
-
-  private int likeCount;
-
-  private int shareCount;
-
-  private LocalDateTime updatedAt;
-
-  private LocalDateTime createdAt;
-
-  @OneToMany(mappedBy = "post")
-  List<HashtagMapping> hashtagMappingList;
+    public void increaseViewCount() {
+        viewCount++;
+    }
 
 }

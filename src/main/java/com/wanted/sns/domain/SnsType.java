@@ -5,24 +5,24 @@ import lombok.Getter;
 @Getter
 public enum SnsType {
 
-  FACEBOOK("facebook"),
-  TWITTER("twitter"),
-  INSTAGRAM("instagram"),
-  THREADS("threads");
+    FACEBOOK("facebook"),
+    TWITTER("twitter"),
+    INSTAGRAM("instagram"),
+    THREADS("threads");
 
-  private final String value;
+    private final String value;
 
-  SnsType(String value) {
-    this.value = value;
-  }
-
-  public static SnsType find(String value) {
-    for (SnsType snsType : SnsType.values()) {
-      if (snsType.getValue().equals(value)) {
-        return snsType;
-      }
+    SnsType(String value) {
+        this.value = value;
     }
-    return null;
-  }
+
+    public static SnsType find(String value) {
+        for (SnsType snsType : SnsType.values()) {
+            if (snsType.getValue().equals(value)) {
+                return snsType;
+            }
+        }
+        return null;
+    }
 
 }
