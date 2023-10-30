@@ -14,7 +14,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<Void> signUp(@RequestBody SignUpRequest request) {
+    public ResponseEntity<Void> signUp(@RequestBody final SignUpRequest request) {
         memberService.signUp(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
