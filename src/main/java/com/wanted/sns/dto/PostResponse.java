@@ -29,9 +29,10 @@ public class PostResponse {
 
     List<String> hashtagList = new ArrayList<>();
 
-    @JsonFormat(pattern = "yyyy.MM.dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDateTime updatedAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDateTime createdAt;
 
     public PostResponse(Post post) {
