@@ -54,7 +54,7 @@ public class VerificationService {
         return new VerifyResponse(CORRECT);
     }
 
-    private static VerifyResponse failVerification(final VerificationCode verificationCode) {
+    private VerifyResponse failVerification(final VerificationCode verificationCode) {
         verificationCode.increaseCount();
         return new VerifyResponse(INCORRECT);
     }
@@ -69,7 +69,7 @@ public class VerificationService {
                 .orElseThrow(() -> new NotFoundException(String.format("%d번 회원의 인증코드가 존재하지 않습니다.", memberId)));
     }
 
-    private static void validate(final VerificationCode verificationCode) {
+    private void validate(final VerificationCode verificationCode) {
         if (verificationCode.isExpire(LocalDateTime.now())) {
             throw new BusinessException("인증 가능 시간이 초과했습니다. 인증코드를 재발급해주세요.");
         }
