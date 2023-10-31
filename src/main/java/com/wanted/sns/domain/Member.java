@@ -54,4 +54,8 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.role = role;
     }
+
+    public void changeRoleToMember() {
+        role = MemberRole.MEMBER;
+    }
 }
