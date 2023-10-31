@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.*;
 public class ControllerAdvice {
 
     @ExceptionHandler(BusinessException.class)
-    public ErrorResponse handleBusinessException(final Exception e) {
+    public ErrorResponse handleBusinessException(final BusinessException e) {
         return ErrorResponse.create(e, HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ErrorResponse handleNotFoundException(final NotFoundException e) {
+        return ErrorResponse.create(e, HttpStatus.NOT_FOUND, e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
