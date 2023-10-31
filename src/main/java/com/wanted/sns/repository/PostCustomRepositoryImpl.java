@@ -9,12 +9,14 @@ import com.wanted.sns.dto.PostResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Fetch;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -25,23 +27,25 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
     @Override
     public List<PostResponse> findAllPostBy(PostRequest postRequest) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<PostResponse> query = builder.createQuery(PostResponse.class);
+        CriteriaQuery<Post> query = builder.createQuery(Post.class);
         Root<Post> post = query.from(Post.class);
+        Fetch<Post, HashtagMapping> hashtagMapping = post.fetch("hashtagMappingList");
+        hashtagMapping.fetch("hashtag", JoinType.LEFT);
 
         int pageOffset = postRequest.page() * postRequest.pageCount();
         List<Predicate> searchCriteria = new ArrayList<>();
 
-        query.select(builder.construct(PostResponse.class, post));
+        query.select(post);
 
         if (postRequest.hashtag() != null) {
             searchCriteria.add(post.get("seq").in(findAllPostByHashtag(postRequest)));
         }
 
-        return entityManager
-                .createQuery(buildCommonQuery(postRequest, searchCriteria, builder, post, query))
-                .setFirstResult(pageOffset)
-                .setMaxResults(postRequest.pageCount())
-                .getResultList();
+        List<Post> result = entityManager.createQuery(
+                        buildCommonQuery(postRequest, searchCriteria, builder, post, query)).setFirstResult(pageOffset)
+                .setMaxResults(postRequest.pageCount()).getResultList();
+
+        return result.stream().map(PostResponse::new).collect(Collectors.toList());
     }
 
     public List<PostResponse> findAllPostByHashtag(PostRequest postRequest) {
