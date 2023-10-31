@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Order {
 
-    ASC("asc"), DESC("desc");
+    ASC("asc"),
+    DESC("desc");
 
     private final String value;
 

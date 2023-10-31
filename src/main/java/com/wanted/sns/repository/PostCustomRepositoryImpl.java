@@ -42,8 +42,10 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
         }
 
         List<Post> result = entityManager.createQuery(
-                        buildCommonQuery(postRequest, searchCriteria, builder, post, query)).setFirstResult(pageOffset)
-                .setMaxResults(postRequest.pageCount()).getResultList();
+                        buildCommonQuery(postRequest, searchCriteria, builder, post, query)
+                ).setFirstResult(pageOffset)
+                .setMaxResults(postRequest.pageCount())
+                .getResultList();
 
         return result.stream().map(PostResponse::new).collect(Collectors.toList());
     }
@@ -63,7 +65,8 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
         }
 
         return entityManager.createQuery(
-                buildCommonQuery(postRequest, searchCriteria, builder, post, query)).getResultList();
+                buildCommonQuery(postRequest, searchCriteria, builder, post, query)
+        ).getResultList();
     }
 
 

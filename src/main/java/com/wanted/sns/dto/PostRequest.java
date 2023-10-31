@@ -6,6 +6,7 @@ import lombok.Builder;
 public record PostRequest(
         String hashtag, String type, String order, String orderBy,
         String searchBy, String search, Integer pageCount, Integer page) {
+
     @Builder
     public PostRequest {
         if (pageCount == null) {

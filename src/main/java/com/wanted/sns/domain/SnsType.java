@@ -6,8 +6,11 @@ import lombok.Getter;
 public enum SnsType {
 
     FACEBOOK("facebook"),
+
     TWITTER("twitter"),
+
     INSTAGRAM("instagram"),
+
     THREADS("threads");
 
     private final String value;
