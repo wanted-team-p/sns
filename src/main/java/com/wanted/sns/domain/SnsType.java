@@ -21,7 +21,7 @@ public enum SnsType {
 
     public static SnsType find(String value) {
         for (SnsType snsType : SnsType.values()) {
-            if (snsType.getValue().equals(value)) {
+            if (snsType.getValue().equalsIgnoreCase(value)) {
                 return snsType;
             }
         }
