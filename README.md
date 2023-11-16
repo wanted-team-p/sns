@@ -185,7 +185,7 @@ src
 
 </details>
 
-### 해시코드 매핑 테이블
+### 해시코드 테이블
 <details>
 <summary>클릭하여 상세보기</summary>
 
