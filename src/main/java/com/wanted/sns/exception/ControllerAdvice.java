@@ -13,9 +13,10 @@ public class ControllerAdvice {
     public ErrorResponse handleNoResultException(final NoResultException e){
         return ErrorResponse.create(e, HttpStatus.NOT_FOUND, e.getMessage());
     }
-
+  
     @ExceptionHandler(ExternalApiException.class)
     public ErrorResponse handleExternalApiException(final ExternalApiException e){
         return ErrorResponse.create(e, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
+
 }

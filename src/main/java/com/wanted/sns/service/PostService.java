@@ -1,15 +1,20 @@
 package com.wanted.sns.service;
 
+
 import com.wanted.sns.domain.SnsType;
 import com.wanted.sns.exception.ExternalApiException;
-import com.wanted.sns.repository.PostRepository;
 import jakarta.persistence.NoResultException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.wanted.sns.domain.Post;
+import org.springframework.transaction.annotation.Transactional;
+import com.wanted.sns.dto.PostRequest;
+import com.wanted.sns.dto.PostResponse;
+import com.wanted.sns.repository.PostRepository;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Transactional
@@ -17,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PostService {
 
     private final PostRepository postRepository;
+
 
     public void callLikeApi(long seq) {
         WebClient webClient = buildWebClient(getSnsType(seq));
@@ -69,6 +75,17 @@ public class PostService {
         return WebClient.builder()
                 .baseUrl(snsType.getBaseurl())
                 .build();
+
+    public PostResponse getPost(long seq) {
+        Post post = postRepository.findPostBySeq(seq);
+
+        post.increaseViewCount();
+
+        return post.toDTO();
+    }
+  
+    public List<PostResponse> getPostList(PostRequest postRequest) {
+        return postRepository.findAllPostBy(postRequest);
     }
 
 }

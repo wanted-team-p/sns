@@ -20,6 +20,14 @@ public enum SnsType {
     SnsType(String value, String baseurl) {
         this.value = value;
         this.baseurl = baseurl;
+
+    public static SnsType find(String value) {
+        for (SnsType snsType : SnsType.values()) {
+            if (snsType.getValue().equalsIgnoreCase(value)) {
+                return snsType;
+            }
+        }
+        return null;
     }
 
 }
