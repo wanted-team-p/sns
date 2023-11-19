@@ -11,26 +11,13 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
+@DynamicUpdate
 @Entity
 public class Post {
   
-    @OneToMany(mappedBy = "post")
-    List<HashtagMapping> hashtagMappingList;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private long seq;
-    @Enumerated(EnumType.STRING)
-    private SnsType type;
-    private String title;
-    private String content;
-    private int viewCount;
-    private int likeCount;
-    private int shareCount;
-    private LocalDateTime updatedAt;
-    private LocalDateTime createdAt;
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long seq;
@@ -61,6 +48,14 @@ public class Post {
 
     public void increaseViewCount() {
         viewCount++;
+    }
+
+    public void increaseLikeCount(){
+        likeCount++;
+    }
+
+    public void increaseShareCount(){
+        shareCount++;
     }
   
 }

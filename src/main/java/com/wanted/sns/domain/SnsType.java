@@ -5,19 +5,21 @@ import lombok.Getter;
 @Getter
 public enum SnsType {
 
-    FACEBOOK("facebook"),
+    FACEBOOK("facebook","https://www.facebook.com/" ),
 
-    TWITTER("twitter"),
+    TWITTER("twitter","https://www.twitter.com/"),
 
-    INSTAGRAM("instagram"),
+    INSTAGRAM("instagram","https://www.instagram.com/"),
 
-    THREADS("threads");
+    THREADS("threads","https://www.threads.com/");
 
     private final String value;
 
-    SnsType(String value) {
+    private final String baseurl;
+
+    SnsType(String value, String baseurl) {
         this.value = value;
-    }
+        this.baseurl = baseurl;
 
     public static SnsType find(String value) {
         for (SnsType snsType : SnsType.values()) {
