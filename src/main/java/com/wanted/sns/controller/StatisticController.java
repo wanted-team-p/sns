@@ -23,11 +23,6 @@ public class StatisticController {
             @Valid @ModelAttribute StatisticRequest statisticRequest
     ) {
         // TODO: JWT 토큰을 통해 인증, 유저명을 받음. 만약 hashtag가 null이면 유저명을 넣음
-
-        System.out.println(statisticRequest.getStart());
-        System.out.println(statisticRequest.getStart().getClass());
-        System.out.println(statisticRequest.getEnd());
-
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(statisticService.getStatistics(statisticRequest));
