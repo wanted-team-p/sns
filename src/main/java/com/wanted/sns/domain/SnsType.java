@@ -6,8 +6,11 @@ import lombok.Getter;
 public enum SnsType {
 
     FACEBOOK("facebook"),
+
     TWITTER("twitter"),
+
     INSTAGRAM("instagram"),
+
     THREADS("threads");
 
     private final String value;
@@ -18,7 +21,7 @@ public enum SnsType {
 
     public static SnsType find(String value) {
         for (SnsType snsType : SnsType.values()) {
-            if (snsType.getValue().equals(value)) {
+            if (snsType.getValue().equalsIgnoreCase(value)) {
                 return snsType;
             }
         }
