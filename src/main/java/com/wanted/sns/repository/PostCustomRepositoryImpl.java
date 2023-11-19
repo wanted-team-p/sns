@@ -31,6 +31,17 @@ public class PostCustomRepositoryImpl implements PostCustomRepository {
     private final EntityManager entityManager;
 
     @Override
+    public Post findPostBySeq(long seq) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Post> query = builder.createQuery(Post.class);
+        Root<Post> post = query.from(Post.class);
+
+        Join<Post, HashtagMapping> hashtagMapping = (Join) post.fetch("hashtagMappingList");
+        hashtagMapping.fetch("hashtag", JoinType.LEFT);
+
+        query.select(post).where(builder.equal(post.get("seq"), seq));
+        return entityManager.createQuery(query).getSingleResult();
+
     public List<PostResponse> findAllPostBy(PostRequest postRequest) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Post> query = builder.createQuery(Post.class);

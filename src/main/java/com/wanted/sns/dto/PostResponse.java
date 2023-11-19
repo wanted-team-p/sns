@@ -1,5 +1,6 @@
 package com.wanted.sns.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wanted.sns.domain.HashtagMapping;
 import com.wanted.sns.domain.Post;
 import java.time.LocalDateTime;
@@ -28,8 +29,10 @@ public class PostResponse {
 
     List<String> hashtagList = new ArrayList<>();
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDateTime updatedAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDateTime createdAt;
 
     public PostResponse(Post post) {
